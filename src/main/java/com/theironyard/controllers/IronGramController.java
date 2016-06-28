@@ -4,6 +4,7 @@ import com.theironyard.entities.Photo;
 import com.theironyard.entities.User;
 import com.theironyard.services.PhotoRepository;
 import com.theironyard.services.UserRepository;
+import org.aspectj.weaver.patterns.IfPointcut;
 import org.h2.tools.Server;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,15 +45,23 @@ public class IronGramController {
             throw new Exception("Can't find sender or receiver");
         }
 
-        File dir = new File("public/photos");
-        dir.mkdirs();
+        if (file.getContentType().contains("image")) {
 
-        File photoFile = File.createTempFile("photo", file.getOriginalFilename(), dir);
-        FileOutputStream fos = new FileOutputStream(photoFile);
-        fos.write(file.getBytes());
+            File dir = new File("public/photos");
+            dir.mkdirs();
+            File photoFile = File.createTempFile("photo", file.getOriginalFilename(), dir);
+            FileOutputStream fos = new FileOutputStream(photoFile);
+            fos.write(file.getBytes());
+            Photo photo = new Photo(sender, rec, photoFile.getName(), deleteTime, makePublic);
+            photos.save(photo);
 
-        Photo photo = new Photo(sender, rec, photoFile.getName(), deleteTime, makePublic);
-        photos.save(photo);
+            System.out.println("Upload Successful");
+
+        }
+        else {
+            throw new Exception("Invalid File Type");
+//            System.out.println("Wrong File Type");
+        }
 
         return "redirect:/";
     }
