@@ -19,8 +19,6 @@ public class Photo {
     @ManyToOne
     User recipient;
 
-//    boolean isPrivate = false;
-
     @Column(nullable = false)
     String filename;
 
@@ -28,15 +26,18 @@ public class Photo {
 
     long deleteTime;
 
+    boolean makePublic = false;
+
 
     public Photo() {
     }
 
-    public Photo(User sender, User recipient, String filename, long deleteTime) {
+    public Photo(User sender, User recipient, String filename, long deleteTime, boolean makePublic) {
         this.sender = sender;
         this.recipient = recipient;
         this.filename = filename;
         this.deleteTime = deleteTime;
+        this.makePublic = makePublic;
     }
 
     public int getId() {
@@ -93,5 +94,13 @@ public class Photo {
 
     public void setDeleteTime(long deleteTime) {
         this.deleteTime = deleteTime;
+    }
+
+    public boolean isMakePublic() {
+        return makePublic;
+    }
+
+    public void setMakePublic(boolean makePublic) {
+        this.makePublic = makePublic;
     }
 }
