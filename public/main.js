@@ -33,3 +33,4 @@ function login() {
 }
 
 $("#loggedIn").hide();
+//setInterval(getPhotos, 1000);
