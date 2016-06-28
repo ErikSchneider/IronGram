@@ -57,8 +57,8 @@ public class IronGramRestController {
                 p.setlDT(LocalDateTime.now());
                 photos.save(p);
             }
-            else if (!LocalDateTime.now().minusSeconds(10).isBefore(p.getlDT())) {
-                File fileOnDisk = new File("public/files/" + p.getFilename());
+            else if (!LocalDateTime.now().minusSeconds(p.getDeleteTime()).isBefore(p.getlDT())) {
+                File fileOnDisk = new File("public/photos/" + p.getFilename());
                 fileOnDisk.delete();
                 photos.delete(p);
             }

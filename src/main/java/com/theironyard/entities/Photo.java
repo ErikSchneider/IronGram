@@ -26,16 +26,18 @@ public class Photo {
 
     LocalDateTime lDT;
 
+    long deleteTime;
+
 
     public Photo() {
     }
 
-    public Photo(User sender, User recipient, String filename) {
+    public Photo(User sender, User recipient, String filename, long deleteTime) {
         this.sender = sender;
         this.recipient = recipient;
         this.filename = filename;
+        this.deleteTime = deleteTime;
     }
-
 
     public int getId() {
         return id;
@@ -83,5 +85,13 @@ public class Photo {
 
     public void setlDT(LocalDateTime lDT) {
         this.lDT = lDT;
+    }
+
+    public long getDeleteTime() {
+        return deleteTime;
+    }
+
+    public void setDeleteTime(long deleteTime) {
+        this.deleteTime = deleteTime;
     }
 }

@@ -9,7 +9,7 @@
 <div id="loggedIn">
     <form action="/upload" method="post" enctype="multipart/form-data">
         <input type="file" name="file"/>
-        Set timeout: <input type="text" name="deleteTime"/>
+        Set timeout: <input type="number" min="0" max="60" name="deleteTime"/>
         Make public? <input type="checkbox" name="makePublic">
         <input type="text" name="recipient" placeholder="Recipient Name"/>
         <button type="submit">Upload</button>
